@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-anonymous-default-export
 const apiPath = '/api/v1';
 
 export default {

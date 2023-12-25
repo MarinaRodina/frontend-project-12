@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
@@ -17,7 +17,6 @@ const LoginPage = () => {
     const auth = useAuth();
     const [authFailed, setAuthFailed] = useState(false);
     const inputRef = useRef(null);
-    const location = useLocation();
     const navigate = useNavigate();
 
 
@@ -36,10 +35,9 @@ const LoginPage = () => {
 
             try {
                 const res = await axios.post(routes.loginPath(), values);
-                localStorage.setItem('userId', JSON.stringify(res.data));
+                localStorage.setItem('user', JSON.stringify(res.data));
                 auth.logIn();
-                const { from } = location.state;
-                navigate(from);
+                navigate(routes.chatPagePath());
             } catch (err) {
                 formik.setSubmitting(false);
                 if (err.isAxiosError && err.response.status === 401) {
