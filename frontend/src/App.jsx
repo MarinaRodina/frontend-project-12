@@ -1,21 +1,24 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ChatPage from './Components/ChatPage.jsx';
 import LoginPage from './Components/LoginPage.jsx';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import NotFound from './Components/NotFound.jsx';
 import AuthProvider from './Components/AuthProvider.jsx';
 import routes from './Routes.js';
 
 const App = () => {
   return (
-    <AuthProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
         <Routes>
-          <Route path={routes.chatPagePath()} element={<ChatPage />} />
+          <Route path="*" element={<NotFound />} />
           <Route path={routes.loginPagePath()} element={<LoginPage />} />
+          <Route path={routes.chatPagePath()} element={<ChatPage />} />
         </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+      </AuthProvider>
+    </BrowserRouter>
+
   );
 }
 

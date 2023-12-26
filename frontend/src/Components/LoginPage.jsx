@@ -9,8 +9,8 @@ import useAuth from '../Hooks/useAuth.jsx';
 import routes from '../Routes.js';
 
 const loginSchema = yup.object().shape({
-    username: yup.string().trim().required(),
-    password: yup.string().trim().required().min(6),
+    username: yup.string().trim().required('Заполните это поле'),
+    password: yup.string().trim().required('Заполните это поле').min(6),
 });
 
 const LoginPage = () => {
@@ -18,8 +18,6 @@ const LoginPage = () => {
     const [authFailed, setAuthFailed] = useState(false);
     const inputRef = useRef(null);
     const navigate = useNavigate();
-
-
     useEffect(() => {
         inputRef.current.focus();
     }, []);
@@ -32,10 +30,9 @@ const LoginPage = () => {
         validationSchema: loginSchema,
         onSubmit: async (values) => {
             setAuthFailed(false);
-
             try {
                 const res = await axios.post(routes.loginPath(), values);
-                localStorage.setItem('user', JSON.stringify(res.data));
+                localStorage.setItem('userId', JSON.stringify(res.data));
                 auth.logIn();
                 navigate(routes.chatPagePath());
             } catch (err) {
