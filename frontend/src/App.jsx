@@ -6,20 +6,25 @@ import LoginPage from './Components/LoginPage.jsx';
 import NotFound from './Components/NotFound.jsx';
 import AuthProvider from './Components/AuthProvider.jsx';
 import routes from './Routes.js';
+import useAuth from './Hooks/useAuth.jsx';
 
-const App = () => {
-  return (
-    <BrowserRouter>
-      <AuthProvider>
+const RoutePrivate = ({ children }) => {
+  const auth = useAuth();
+  return auth.logIn ? children : auth.logOut;
+};
+
+const App = () => (
+  <BrowserRouter>
+    <AuthProvider>
+      <div className="d-flex flex-column h-100">
         <Routes>
           <Route path="*" element={<NotFound />} />
+          <Route path={routes.chatPagePath()} element={<RoutePrivate><ChatPage /></RoutePrivate>} />
           <Route path={routes.loginPagePath()} element={<LoginPage />} />
-          <Route path={routes.chatPagePath()} element={<ChatPage />} />
         </Routes>
-      </AuthProvider>
-    </BrowserRouter>
-
-  );
-}
+      </div>
+    </AuthProvider>
+  </BrowserRouter>
+);
 
 export default App;
