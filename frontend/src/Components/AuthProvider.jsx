@@ -6,14 +6,14 @@ import routes from '../Routes.js';
 const AuthProvider = ({ children }) => {
     const getUser = JSON.parse(localStorage.getItem('userInfo'));
     const [token, setToken] = useState(getUser ?? null);
+
     const navigate = useNavigate();
 
     const logIn = useCallback((response) => {
         const data = JSON.stringify(response.data);
-        localStorage.clear();
         localStorage.setItem('userInfo', data);
         setToken(data);
-        navigate('/');
+        navigate(routes.chatPagePath());
     }, [navigate]);
 
     const logOut = useCallback(() => {
