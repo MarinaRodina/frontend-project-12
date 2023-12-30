@@ -4,6 +4,7 @@ import AuthContext from '../Contexts/AuthContext.jsx';
 import routes from '../Routes.js';
 
 const AuthProvider = ({ children }) => {
+    console.log(localStorage.getItem('userInfo'));
     const getUser = JSON.parse(localStorage.getItem('userInfo'));
     const [token, setToken] = useState(getUser ?? null);
 
@@ -11,6 +12,7 @@ const AuthProvider = ({ children }) => {
 
     const logIn = useCallback((response) => {
         const data = JSON.stringify(response.data);
+        localStorage.clear();
         localStorage.setItem('userInfo', data);
         setToken(data);
         navigate(routes.chatPagePath());

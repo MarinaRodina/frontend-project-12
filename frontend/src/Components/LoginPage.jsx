@@ -21,7 +21,9 @@ const LoginPage = () => {
         inputRef.current.focus();
     }, []);
 
-    const formik = useFormik({
+    const {
+        values, errors, handleChange, handleSubmit, setSubmitting, isSubmitting
+    } = useFormik({
         initialValues: {
             username: '',
             password: '',
@@ -30,16 +32,16 @@ const LoginPage = () => {
         validateOnChange: false,
         errorToken: false,
         onSubmit: () => {
-            formik.setSubmitting(true);
-            axios.post(routes.loginPath(), { username: formik.values.username, password: formik.values.password })
+            setSubmitting(true);
+            axios.post(routes.loginPath(), { username: values.username, password: values.password })
                 .then((response) => {
                     auth.logIn(response);
                 })
                 .catch(() => {
-                    formik.setSubmitting(false);
+                    setSubmitting(false);
                 })
                 .finally(() => {
-                    formik.setSubmitting(true);
+                    setSubmitting(true);
                 });
         },
     });
@@ -59,7 +61,7 @@ const LoginPage = () => {
                                     <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
                                         <img src="***" className="rounded-circle" alt="Войти" />
                                     </div>
-                                    <Form className="col-12 col-md-6 mt-3 mt-mb-0" onSubmit={formik.handleSubmit}>
+                                    <Form className="col-12 col-md-6 mt-3 mt-mb-0" onSubmit={handleSubmit}>
                                         <h1 className="text-center mb-4">Войти</h1>
                                         <Form.Group className="form-floating mb-3">
                                             <Form.Control
@@ -70,8 +72,8 @@ const LoginPage = () => {
                                                 placeholder="Ваш ник"
                                                 id="username"
                                                 className="form-control"
-                                                value={formik.values.username}
-                                                onChange={formik.handleChange}
+                                                value={values.username}
+                                                onChange={handleChange}
                                             />
                                             <Form.Label htmlFor="username">Ваш ник</Form.Label>
                                         </Form.Group>
@@ -84,14 +86,14 @@ const LoginPage = () => {
                                                 type="password"
                                                 id="password"
                                                 className="form-control"
-                                                value={formik.values.password}
-                                                onChange={formik.handleChange}
+                                                value={values.password}
+                                                onChange={handleChange}
                                             />
                                             <Form.Label className="form-label" htmlFor="password">Пароль</Form.Label>
                                         </Form.Group>
                                         <Button
+                                            disabled={isSubmitting}
                                             type="submit"
-                                            disabled={formik.isSubmitting}
                                             className="w-100 mb-3 btn btn-primary">
                                             Войти
                                         </Button>
