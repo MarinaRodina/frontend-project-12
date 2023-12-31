@@ -6,6 +6,7 @@ import { useFormik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
 import useAuth from '../Hooks/useAuth.jsx';
 import routes from '../Routes.js';
+import { useNavigate } from 'react-router-dom';
 
 
 const loginSchema = yup.object().shape({
@@ -16,6 +17,7 @@ const loginSchema = yup.object().shape({
 const LoginPage = () => {
     const auth = useAuth();
     const inputRef = useRef(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         inputRef.current.focus();
@@ -35,7 +37,8 @@ const LoginPage = () => {
             setSubmitting(true);
             axios.post(routes.loginPath(), { username: values.username, password: values.password })
                 .then((response) => {
-                    auth.logIn(response);
+                    auth.logIn(response)
+                    navigate(routes.chatPagePath());
                 })
                 .catch(() => {
                     setSubmitting(false);
@@ -67,7 +70,7 @@ const LoginPage = () => {
                                             <Form.Control
                                                 ref={inputRef}
                                                 name="username"
-                                                autocomplete="username"
+                                                autoComplete="username"
                                                 required=""
                                                 placeholder="Ваш ник"
                                                 id="username"
@@ -80,7 +83,7 @@ const LoginPage = () => {
                                         <Form.Group className="form-floating mb-4">
                                             <Form.Control
                                                 name="password"
-                                                autocomplete="current-password"
+                                                autoComplete="current-password"
                                                 required=""
                                                 placeholder="Пароль"
                                                 type="password"
