@@ -18,12 +18,12 @@ const ChatPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(routes.usersPathPath(), {
+                const response = await axios.get(routes.usersPath(), {
                     headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}` },
                 });
                 console.log(response.data);
             } catch (err) {
-                auth.logOut();
+                console.log(err);
             }
         };
         fetchData();

@@ -7,6 +7,7 @@ import { Form, Button } from 'react-bootstrap';
 import useAuth from '../Hooks/useAuth.jsx';
 import routes from '../Routes.js';
 import { useNavigate } from 'react-router-dom';
+import avatar from '../images/avatar.jpg';
 
 
 const loginSchema = yup.object().shape({
@@ -43,9 +44,6 @@ const LoginPage = () => {
                 .catch(() => {
                     setSubmitting(false);
                 })
-                .finally(() => {
-                    setSubmitting(true);
-                });
         },
     });
 
@@ -62,7 +60,7 @@ const LoginPage = () => {
                             <div className="card shadow-sm">
                                 <div className="card-body row p-5">
                                     <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                                        <img src="***" className="rounded-circle" alt="Войти" />
+                                        <img src={avatar} className="rounded-circle" alt="Войти" />
                                     </div>
                                     <Form className="col-12 col-md-6 mt-3 mt-mb-0" onSubmit={handleSubmit}>
                                         <h1 className="text-center mb-4">Войти</h1>

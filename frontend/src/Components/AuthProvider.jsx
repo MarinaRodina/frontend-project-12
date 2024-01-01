@@ -12,7 +12,6 @@ const AuthProvider = ({ children }) => {
 
     const logIn = useCallback((response) => {
         const data = JSON.stringify(response.data);
-        localStorage.clear();
         localStorage.setItem('userInfo', data);
         setToken(data);
         navigate(routes.chatPagePath());
