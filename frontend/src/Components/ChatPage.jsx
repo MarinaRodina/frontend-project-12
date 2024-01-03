@@ -3,11 +3,15 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth.jsx';
+import { useDispatch } from 'react-redux';
 import routes from '../Routes.js';
+import { actions as channelsActions } from '../Slices/channelsSlice';
+import { actions as messagesActions } from '../Slices/messagesSlice';
 
 const ChatPage = () => {
     const navigate = useNavigate();
     const auth = useAuth();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (!localStorage.getItem('userInfo')) {
@@ -21,7 +25,8 @@ const ChatPage = () => {
                 const response = await axios.get(routes.usersPath(), {
                     headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}` },
                 });
-                console.log(response.data);
+                dispatch(channelsActions.setChannels(response.data.channels));
+                dispatch(messagesActions.setMessages(response.data.messages));
             } catch (err) {
                 console.log(err);
             }
