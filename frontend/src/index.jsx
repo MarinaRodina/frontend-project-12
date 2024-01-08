@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
+import init from './init.jsx';
 
-const root = ReactDOM.createRoot(document.getElementById('chat'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const Application = async () => {
+  const root = ReactDOM.createRoot(document.getElementById('chat'));
+  root.render(await init());
+};
+
+Application();
