@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth.jsx';
 import { useDispatch } from 'react-redux';
 import routes from '../Routes.js';
+import Channels from './Chat/Channels.jsx';
+import Messages from './Chat/Messages.jsx';
 import { actions as channelsActions } from '../Slices/channelsSlice';
 import { actions as messagesActions } from '../Slices/messagesSlice';
 
@@ -37,7 +39,8 @@ const ChatPage = () => {
     return (
         <div className="container h-100 my-4 overflow-hidden rounded shadow">
             <div className="row h-100 bg-white flex-md-row">
-                <p>Chat Page!!!</p>
+                <Channels />
+                <Messages />
             </div>
         </div>
     );
