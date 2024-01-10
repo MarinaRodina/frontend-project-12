@@ -9,6 +9,7 @@ import AuthProvider from './Components/AuthProvider.jsx';
 import routes from './Routes.js';
 import useAuth from './Hooks/useAuth.jsx';
 import store from './Slices/index.js';
+import ModalComponent from './Components/ModalComponent.jsx';
 
 const RoutePrivate = ({ children }) => {
   const auth = useAuth();
@@ -25,6 +26,7 @@ const App = () => (
             <Route path={routes.chatPagePath()} element={<RoutePrivate><ChatPage /></RoutePrivate>} />
             <Route path={routes.loginPagePath()} element={<LoginPage />} />
           </Routes>
+          <ModalComponent />
         </div>
       </AuthProvider>
     </BrowserRouter>

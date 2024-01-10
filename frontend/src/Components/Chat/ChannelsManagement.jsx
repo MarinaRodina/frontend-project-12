@@ -22,9 +22,7 @@ const ChannelsManagement = ({ showModal }) => {
                     className={id === channelIdActive ? 'w-100 rounded-0 text-start btn btn-secondary truncate' : 'w-100 rounded-0 text-start btn truncate'}
                     onClick={() => setChannelIdAction(id)}
                 >
-                    <span className="me-1">
-                        #
-                    </span>
+                    <span className="me-1">#</span>
                     {name}
                 </button>
             </li>
@@ -38,6 +36,7 @@ const ChannelsManagement = ({ showModal }) => {
                         className="w-50"
                     >
                         <span className="me-1">#</span>
+                        {name}
                     </Button>
                     <Dropdown.Toggle
                         variant={id === channelIdActive ? 'flex-grow-0 dropdown-toggle dropdown-toggle-split btn btn-secondary' : 'flex-grow-0 dropdown-toggle dropdown-toggle-split btn'}
