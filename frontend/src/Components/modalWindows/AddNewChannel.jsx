@@ -54,7 +54,7 @@ const AddNewChannel = () => {
     });
 
     const classError = cn('mb-2 form-control', {
-        'mb-2 form-control is-invalid': errors.channelName,
+        'is-invalid': errors.channelName,
     });
 
     const inputRef = useRef(null);
@@ -68,7 +68,6 @@ const AddNewChannel = () => {
             <Modal.Header closeButton onHide={onHide}>
                 <Modal.Title>Добавить канал</Modal.Title>
             </Modal.Header>
-
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
                     <Modal.Footer>

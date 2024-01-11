@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import FormGroup from 'react-bootstrap/FormGroup';
 import { useFormik } from 'formik';
