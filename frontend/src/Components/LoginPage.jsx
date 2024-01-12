@@ -4,10 +4,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth.jsx';
 import routes from '../Routes.js';
 import { useNavigate } from 'react-router-dom';
-import avatar from '../images/avatar.jpg';
+import avatar1 from '../images/avatar1.jpg';
 
 
 const loginSchema = yup.object().shape({
@@ -60,7 +61,7 @@ const LoginPage = () => {
                             <div className="card shadow-sm">
                                 <div className="card-body row p-5">
                                     <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                                        <img src={avatar} className="rounded-circle" alt="Войти" />
+                                        <img src={avatar1} className="rounded-circle" alt="Войти" />
                                     </div>
                                     <Form className="col-12 col-md-6 mt-3 mt-mb-0" onSubmit={handleSubmit}>
                                         <h1 className="text-center mb-4">Войти</h1>
@@ -103,7 +104,7 @@ const LoginPage = () => {
                                 <div className="card-footer p-4">
                                     <div className="text-center">
                                         <span>Нет аккаунта? </span>
-                                        <a href="/signup">Регистрация</a>
+                                        <Link to={routes.signupPagePath()}>{'Регистрация'}</Link>
                                     </div>
                                 </div>
                             </div>
