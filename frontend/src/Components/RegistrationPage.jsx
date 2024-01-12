@@ -48,7 +48,11 @@ const RegistrationPage = () => {
                     auth.logIn(response);
                     navigate(routes.chatPagePath());
                 })
-                .catch(() => {
+                .catch((err) => {
+                    if (err.response.status === 409) {
+                        errors.username = 'Такой пользователь уже существует';
+                        return setSubmitting(false);
+                    }
                     setSubmitting(false);
                 })
         },
