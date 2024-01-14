@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ChatPage from './Components/ChatPage.jsx';
 import LoginPage from './Components/LoginPage.jsx';
 import RegistrationPage from './Components/RegistrationPage.jsx';
+import HeaderComponent from './Components/HeaderComponent.jsx';
 import NotFound from './Components/NotFound.jsx';
 import AuthProvider from './Components/AuthProvider.jsx';
 import routes from './Routes.js';
@@ -22,6 +23,7 @@ const App = () => (
     <BrowserRouter>
       <AuthProvider>
         <div className="d-flex flex-column h-100">
+          <HeaderComponent />
           <Routes>
             <Route path="*" element={<NotFound />} />
             <Route path={routes.chatPagePath()} element={<RoutePrivate><ChatPage /></RoutePrivate>} />
