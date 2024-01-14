@@ -19,7 +19,6 @@ const AuthProvider = ({ children }) => {
 
     const logOut = useCallback(() => {
         localStorage.removeItem('userInfo');
-        setToken(null);
         navigate(routes.loginPagePath());
     }, [navigate]);
 
