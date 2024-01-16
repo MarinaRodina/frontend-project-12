@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth.jsx';
 import { useDispatch } from 'react-redux';

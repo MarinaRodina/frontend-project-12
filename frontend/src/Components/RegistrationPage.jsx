@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
@@ -8,28 +9,28 @@ import avatar2 from '../images/avatar2.jpg';
 import routes from '../Routes.js';
 import useAuth from '../Hooks/useAuth.jsx';
 
-const registrationSchema = yup.object().shape({
-    username: yup.string().trim()
-        .min(3, 'От 3 до 20 символов')
-        .max(20, 'От 3 до 20 символов')
-        .required('Обязательное поле'),
-    password: yup.string().trim()
-        .min(6, 'Не менее 6 символов')
-        .required('Обязательное поле'),
-    confirmPassword: yup.string().trim()
-        .required('Обязательное поле')
-        .oneOf([yup.ref('password'), null], 'Пароли должны совпадать'),
-});
-
 const RegistrationPage = () => {
     const auth = useAuth();
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const usernameRef = useRef(null);
-
     useEffect(() => {
         usernameRef.current.focus();
     }, []);
+
+    const registrationSchema = yup.object().shape({
+        username: yup.string().trim()
+            .min(3, t('signup.numberCharacters'))
+            .max(20, t('signup.numberCharacters'))
+            .required(t('signup.obligatoryField')),
+        password: yup.string().trim()
+            .min(6, t('signup.moreCharacters'))
+            .required(t('signup.obligatoryField')),
+        confirmPassword: yup.string().trim()
+            .required(t('signup.obligatoryField'))
+            .oneOf([yup.ref('password'), null], t('signup.passwordsMustMatch')),
+    });
 
     const {
         values, errors, touched, handleChange, handleSubmit, handleBlur, setSubmitting, isSubmitting,

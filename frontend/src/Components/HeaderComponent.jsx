@@ -12,8 +12,8 @@ const HeaderComponent = () => {
         <>
             <Navbar className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
                 <Container>
-                    <Navbar.Brand as={Link} to={routes.chatPagePath()}>{t('mainHeader')}</Navbar.Brand>
-                    {auth.token ? <Button type="button" className="btn btn-primary" onClick={auth.logOut}>Выйти</Button> : null}
+                    <Navbar.Brand as={Link} to={routes.chatPagePath()}>{t('header.mainHeader')}</Navbar.Brand>
+                    {auth.token ? <Button type="button" className="btn btn-primary" onClick={auth.logOut}>{t('header.goOut')}</Button> : null}
                 </Container>
             </Navbar>
             <Outlet />
