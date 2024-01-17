@@ -14,15 +14,15 @@ const messagesSlice = createSlice({
     },
 
     setMessages(state, { payload }) {
-        state.messages = payload;
+      state.messages = payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(channelsActions.removeChannel, (state, actions) => {
-        const channelId = actions.payload.id;
-        const remainingMessages = state.messages.filter((i) => i.channelId !== channelId);
-        state.messages = remainingMessages;
-      });
+      const channelId = actions.payload.id;
+      const remainingMessages = state.messages.filter((i) => i.channelId !== channelId);
+      state.messages = remainingMessages;
+    });
   },
 });
 

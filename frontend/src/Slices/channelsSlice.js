@@ -32,11 +32,11 @@ const channelsSlice = createSlice({
     },
 
     setChannels: (state, { payload }) => {
-        state.channels = payload;
+      state.channels = payload;
     },
 
     setChannelId(state, { payload }) {
-        state.channelId = payload;
+      state.channelId = payload;
     },
 
     moveToChannel(state, { payload }) {
