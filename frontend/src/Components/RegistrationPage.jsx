@@ -54,8 +54,8 @@ const RegistrationPage = () => {
             errors.username = t('signup.alreadyExists');
             return setSubmitting(false);
           }
-          setSubmitting(false);
-        })
+          return setSubmitting(false);
+        });
     },
   });
 
@@ -69,7 +69,7 @@ const RegistrationPage = () => {
                 <div>
                   <img src={avatar2} className="rounded-circle" alt={t('signup.registration')} />
                 </div>
-                <Form className="w-50" onSubmit={handleSubmit} >
+                <Form className="w-50" onSubmit={handleSubmit}>
                   <h1 className="text-center mb-4">{t('signup.registration')}</h1>
                   <Form.Group className="form-floating mb-3">
                     <Form.Control
@@ -134,7 +134,7 @@ const RegistrationPage = () => {
           </div>
         </div>
       </div>
-      <div className="Toastify"></div>
+      <div className="Toastify" />
     </>
   );
 };

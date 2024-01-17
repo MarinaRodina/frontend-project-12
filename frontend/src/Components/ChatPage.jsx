@@ -2,8 +2,8 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAuth from '../Hooks/useAuth.jsx';
 import { useDispatch } from 'react-redux';
+import useAuth from '../Hooks/useAuth.jsx';
 import routes from '../Routes.js';
 import Channels from './Chat/Channels.jsx';
 import Messages from './Chat/Messages.jsx';

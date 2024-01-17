@@ -5,20 +5,17 @@ import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import cn from 'classnames';
 import useAuth from '../Hooks/useAuth.jsx';
 import routes from '../Routes.js';
-import { useNavigate } from 'react-router-dom';
 import avatar1 from '../images/avatar1.jpg';
-import cn from 'classnames';
-
 
 const LoginPage = () => {
   const auth = useAuth();
   const { t } = useTranslation();
   const inputRef = useRef(null);
   const navigate = useNavigate();
-
 
   const [error, setError] = useState('');
 
@@ -32,7 +29,7 @@ const LoginPage = () => {
   });
 
   const {
-    values, errors, handleChange, handleSubmit, setSubmitting, isSubmitting
+    values, errors, handleChange, handleSubmit, setSubmitting, isSubmitting,
   } = useFormik({
     initialValues: {
       username: '',
@@ -45,7 +42,7 @@ const LoginPage = () => {
       setSubmitting(true);
       axios.post(routes.loginPath(), { username: values.username, password: values.password })
         .then((response) => {
-          auth.logIn(response)
+          auth.logIn(response);
           navigate(routes.chatPagePath());
         })
         .catch((err) => {
@@ -54,7 +51,7 @@ const LoginPage = () => {
             setSubmitting(false);
           }
           setSubmitting(false);
-        })
+        });
     },
   });
 
@@ -106,7 +103,8 @@ const LoginPage = () => {
                   <Button
                     disabled={isSubmitting}
                     type="submit"
-                    className="w-100 mb-3 btn btn-primary">
+                    className="w-100 mb-3 btn btn-primary"
+                  >
                     {t('login.loginHeader')}
                   </Button>
                 </Form>
@@ -121,7 +119,7 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-      <div className="Toastify"></div>
+      <div className="Toastify" />
     </>
   );
 };

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Button, Form } from 'react-bootstrap';
-import useSocket from '../../Hooks/useSocket.jsx';
 import { useTranslation } from 'react-i18next';
+import useSocket from '../../Hooks/useSocket.jsx';
 
 const Messages = () => {
   const { t } = useTranslation();
@@ -17,8 +17,8 @@ const Messages = () => {
     inputRef.current.focus();
   }, []);
 
-  const activeChannelId = (channels) => {
-    const filter = channels.find((channel) => channel.id === channelsId);
+  const activeChannelId = (channelItem) => {
+    const filter = channelItem.find((channel) => channel.id === channelsId);
     return filter ? filter.name : 'Канал не найден';
   };
 
@@ -38,7 +38,9 @@ const Messages = () => {
     const { username, id, body } = mes;
     return (
       <div className="text-break mb-2" key={id}>
-        <b>{username}</b>: {body}
+        <b>{username}</b>
+        :
+        {body}
       </div>
     );
   });

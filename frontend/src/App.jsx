@@ -25,7 +25,10 @@ const App = () => (
         <div className="d-flex flex-column h-100">
           <HeaderComponent />
           <Routes>
-            <Route path={routes.chatPagePath()} element={<RoutePrivate><ChatPage /></RoutePrivate>} />
+            <Route
+              path={routes.chatPagePath()}
+              element={<RoutePrivate><ChatPage /></RoutePrivate>}
+            />
             <Route path={routes.loginPagePath()} element={<LoginPage />} />
             <Route path={routes.signupPagePath()} element={<RegistrationPage />} />
             <Route path="*" element={<NotFoundPage />} />

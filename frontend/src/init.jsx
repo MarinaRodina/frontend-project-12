@@ -1,8 +1,8 @@
 import React from 'react';
 import i18next from 'i18next';
 import { initReactI18next, I18nextProvider } from 'react-i18next';
-import resources from './Locales/index.js';
 import { io } from 'socket.io-client';
+import resources from './Locales/index.js';
 import App from './App.jsx';
 import SocketProvider from './Components/SocketProvider.jsx';
 import { actions as channelsActions } from './Slices/channelsSlice.js';
