@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
@@ -10,6 +10,7 @@ import useAuth from '../Hooks/useAuth.jsx';
 import routes from '../Routes.js';
 import { useNavigate } from 'react-router-dom';
 import avatar1 from '../images/avatar1.jpg';
+import cn from 'classnames';
 
 
 const LoginPage = () => {
@@ -18,13 +19,16 @@ const LoginPage = () => {
     const inputRef = useRef(null);
     const navigate = useNavigate();
 
+
+    const [error, setError] = useState('');
+
     useEffect(() => {
         inputRef.current.focus();
     }, []);
 
     const loginSchema = yup.object().shape({
-        username: yup.string().trim().required('Заполните это поле'),
-        password: yup.string().trim().required('Заполните это поле'),
+        username: yup.string().trim().required(),
+        password: yup.string().trim().required(),
     });
 
     const {
@@ -44,10 +48,18 @@ const LoginPage = () => {
                     auth.logIn(response)
                     navigate(routes.chatPagePath());
                 })
-                .catch(() => {
+                .catch((err) => {
+                    if (err.response.status === 401) {
+                        setError(t('login.submissionFailed'));
+                        setSubmitting(false);
+                    }
                     setSubmitting(false);
                 })
         },
+    });
+
+    const errorClass = cn('form-control', {
+        'is-invalid': (errors.password) || (errors.username) || error,
     });
 
     return (
@@ -70,7 +82,7 @@ const LoginPage = () => {
                                             required=""
                                             placeholder={t('login.yourNickname')}
                                             id="username"
-                                            className="form-control"
+                                            className={errorClass}
                                             value={values.username}
                                             onChange={handleChange}
                                         />
@@ -84,11 +96,12 @@ const LoginPage = () => {
                                             placeholder={t('login.password')}
                                             type="password"
                                             id="password"
-                                            className="form-control"
+                                            className={errorClass}
                                             value={values.password}
                                             onChange={handleChange}
                                         />
                                         <Form.Label className="form-label" htmlFor="password">{t('login.password')}</Form.Label>
+                                        <Form.Control.Feedback type="invalid">{t('login.submissionFailed')}</Form.Control.Feedback>
                                     </Form.Group>
                                     <Button
                                         disabled={isSubmitting}

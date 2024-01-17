@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FormGroup from 'react-bootstrap/FormGroup';
@@ -14,16 +15,17 @@ import { actions as modalsActions } from '../../Slices/modalsSlice.js';
 const AddNewChannel = () => {
     const socketChat = useSocket();
     const dispatch = useDispatch();
+    const { t } = useTranslation();
     const onHide = () => dispatch(modalsActions.closeModal());
     const channels = useSelector((state) => state.channelsReducer.channels);
     const channelName = channels ? channels.map((channel) => channel.name) : [];
 
     const setNameSchema = yup.object().shape({
         channelName: yup.string().trim()
-            .min(3, 'От 3 до 20 символов')
-            .max(20, 'От 3 до 20 символов')
-            .required('Обязательное поле')
-            .notOneOf(channelName, 'Должно быть уникальным'),
+            .min(3, t('modals.numberCharacters'))
+            .max(20, t('modals.numberCharacters'))
+            .required(t('modals.obligatoryField'))
+            .notOneOf(channelName, t('modals.mustUnique')),
     });
 
     const {
@@ -66,7 +68,7 @@ const AddNewChannel = () => {
     return (
         <Modal show centered onShow={showModal} className="modal-form">
             <Modal.Header closeButton onHide={onHide}>
-                <Modal.Title>Добавить канал</Modal.Title>
+                <Modal.Title>{t('modals.addChannel')}</Modal.Title>
             </Modal.Header>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
@@ -79,7 +81,7 @@ const AddNewChannel = () => {
                             value={values.channelName}
                             onChange={handleChange}
                         />
-                        <Form.Label className="visually-hidden" htmlFor="channelName">{'Имя канала'}</Form.Label>
+                        <Form.Label className="visually-hidden" htmlFor="channelName">{t('modals.channelName')}</Form.Label>
                         <div className="invalid-feedback">{errors.channelName}</div>
                     </Modal.Footer>
                 </Form.Group>
@@ -90,7 +92,7 @@ const AddNewChannel = () => {
                         className="me-2"
                         onClick={() => onHide()}
                     >
-                        Отменить
+                        {t('modals.cancel')}
                     </Button>
                     <Button
                         className="btn-primary"
@@ -98,7 +100,7 @@ const AddNewChannel = () => {
                         variant="primary"
                         disabled={isSubmitting}
                     >
-                        Отправить
+                        {t('modals.send')}
                     </Button>
                 </FormGroup>
             </Form>

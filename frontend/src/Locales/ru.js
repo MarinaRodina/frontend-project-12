@@ -7,7 +7,6 @@ export default {
         },
 
         login: {
-           obligatoryField: 'Заполните это поле',
            yourNickname: 'Ваш ник',
            password: 'Пароль',
            loginHeader: 'Войти',
@@ -22,9 +21,11 @@ export default {
             moreCharacters: 'Не менее 6 символов',
             passwordsMustMatch: 'Пароли должны совпадать',
             userName: 'Имя пользователя',
-            badName: 'Недопустимое имя пользователя',
+            password: 'Пароль',
             confirmPassword: 'Подтвердите пароль',
+            registration: 'Регистрация',
             alreadyExists: 'Такой пользователь уже существует',
+            badName: 'Недопустимое имя пользователя',
             register: 'Зарегистрироваться',
         },
 
@@ -35,8 +36,9 @@ export default {
              messages_few: ' сообщения',
              messages_many: ' сообщений',
            },
-           messageNev: 'Новое сообщение',
+           messageNew: 'Новое сообщение',
            enterMessage: 'Введите сообщение...',
+           send: 'Отправить',
         },
 
         modals: {
@@ -61,6 +63,7 @@ export default {
 
         channels: {
             channelManagement: 'Управление каналом',
+            delete: 'Удалить',
             rename: 'Переименовать',
             channels: 'Каналы',
             channelCreated: 'Канал создан',

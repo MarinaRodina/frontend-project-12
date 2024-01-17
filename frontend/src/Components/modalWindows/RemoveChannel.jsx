@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -11,6 +12,7 @@ import { actions as modalsActions } from '../../Slices/modalsSlice.js';
 const RemoveChannel = () => {
     const socketChat = useSocket();
     const dispatch = useDispatch();
+    const { t } = useTranslation();
     const onHide = () => dispatch(modalsActions.closeModal());
     const modalInfo = useSelector((state) => state.modalsReducer.setModalInfo);
     const channelId = modalInfo.targetId;
@@ -41,11 +43,11 @@ const RemoveChannel = () => {
     return (
         <Modal show centered>
             <Modal.Header closeButton onClick={onHide}>
-                <Modal.Title className="modal-title h4">Удалить канал</Modal.Title>
+                <Modal.Title className="modal-title h4">{t('modals.deleteChannel')}</Modal.Title>
             </Modal.Header>
             <Form onSubmit={handleSubmit}>
                 <Modal.Body>
-                    <p className="lead">Уверены?</p>
+                    <p className="lead">{t('modals.sure')}</p>
                 </Modal.Body>
                 <FormGroup className="d-flex justify-content-end m-3">
                     <Button
@@ -53,7 +55,7 @@ const RemoveChannel = () => {
                         variant="secondary"
                         onClick={() => onHide()}
                     >
-                        Отменить
+                        {t('modals.cancel')}
                     </Button>
                     <Button
                         className="btn-primary"
@@ -62,7 +64,7 @@ const RemoveChannel = () => {
                         ref={inputRef}
                         disabled={isSubmitting}
                     >
-                        Удалить
+                        {t('modals.delete')}
                     </Button>
                 </FormGroup>
             </Form>

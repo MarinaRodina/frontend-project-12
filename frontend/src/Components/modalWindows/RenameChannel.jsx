@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -13,6 +14,7 @@ import { actions as modalsActions } from '../../Slices/modalsSlice.js';
 const RenameChannel = () => {
     const socketChat = useSocket();
     const dispatch = useDispatch();
+    const { t } = useTranslation();
     const onHide = () => dispatch(modalsActions.closeModal());
     const modalInfo = useSelector((state) => state.modalsReducer.setModalInfo);
     const channelId = modalInfo.targetId;
@@ -21,10 +23,10 @@ const RenameChannel = () => {
 
     const setNameSchema = yup.object().shape({
         channelName: yup.string().trim()
-            .min(3, 'От 3 до 20 символов')
-            .max(20, 'От 3 до 20 символов')
-            .required('Обязательное поле')
-            .notOneOf(channelName, 'Должно быть уникальным'),
+            .min(3, t('modals.numberCharacters'))
+            .max(20, t('modals.numberCharacters'))
+            .required(t('modals.obligatoryField'))
+            .notOneOf(channelName, t('modals.mustUnique')),
     });
 
     const channelToRename = channels.find((i) => i.id === channelId);
@@ -64,7 +66,7 @@ const RenameChannel = () => {
     return (
         <Modal show centered onShow={showModal}>
             <Modal.Header closeButton onHide={onHide}>
-                <Modal.Title>Переименовать канал</Modal.Title>
+                <Modal.Title>{t('modals.renameChannel')}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit}>
@@ -78,7 +80,7 @@ const RenameChannel = () => {
                                 value={values.channelName}
                                 onChange={handleChange}
                             />
-                            <Form.Label className="visually-hidden" htmlFor="channelName">Имя канала</Form.Label>
+                            <Form.Label className="visually-hidden" htmlFor="channelName">{t('modals.channelName')}</Form.Label>
                             <div className="invalid-feedback">{errors.channelName}</div>
                         </Modal.Footer>
                     </FormGroup>
@@ -89,7 +91,7 @@ const RenameChannel = () => {
                             className="me-2 btn-secondary"
                             onClick={() => onHide()}
                         >
-                            Отменить
+                            {t('modals.cancel')}
                         </Button>
                         <Button
                             className="btn-primary"
@@ -97,7 +99,7 @@ const RenameChannel = () => {
                             variant="primary"
                             disabled={isSubmitting}
                         >
-                            Отправить
+                            {t('modals.send')}
                         </Button>
                     </FormGroup>
                 </Form>
