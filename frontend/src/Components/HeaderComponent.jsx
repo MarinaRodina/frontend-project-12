@@ -6,19 +6,19 @@ import useAuth from '../Hooks/useAuth.jsx';
 import routes from '../Routes.js';
 
 const HeaderComponent = () => {
-    const auth = useAuth();
-    const { t } = useTranslation();
-    return (
-        <>
-            <Navbar className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
-                <Container>
-                    <Navbar.Brand as={Link} to={routes.chatPagePath()}>{t('header.mainHeader')}</Navbar.Brand>
-                    {auth.token ? <Button type="button" className="btn btn-primary" onClick={auth.logOut}>{t('header.goOut')}</Button> : null}
-                </Container>
-            </Navbar>
-            <Outlet />
-        </>
-    );
+  const auth = useAuth();
+  const { t } = useTranslation();
+  return (
+    <>
+      <Navbar className="shadow-sm navbar navbar-expand-lg navbar-light bg-white">
+        <Container>
+          <Navbar.Brand as={Link} to={routes.chatPagePath()}>{t('header.mainHeader')}</Navbar.Brand>
+          {auth.token ? <Button type="button" className="btn btn-primary" onClick={auth.logOut}>{t('header.goOut')}</Button> : null}
+        </Container>
+      </Navbar>
+      <Outlet />
+    </>
+  );
 };
 
 export default HeaderComponent;
