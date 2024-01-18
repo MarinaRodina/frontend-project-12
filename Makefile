@@ -13,5 +13,8 @@ start:
 deploy:
 	git push heroku main
 
+lint:
+	npx eslint .
+
 starts:
 	make start & make start-frontend
