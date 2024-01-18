@@ -6,6 +6,8 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { Form, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import cn from 'classnames';
 import useAuth from '../Hooks/useAuth.jsx';
 import routes from '../Routes.js';
@@ -16,6 +18,9 @@ const LoginPage = () => {
   const { t } = useTranslation();
   const inputRef = useRef(null);
   const navigate = useNavigate();
+
+  const noNetworkError = () => toast.error(t('error.networkError'));
+  const dataLoadingError = () => toast.error(t('error.dataLoadingError'));
 
   const [error, setError] = useState('');
 
@@ -50,7 +55,16 @@ const LoginPage = () => {
             setError(t('login.submissionFailed'));
             setSubmitting(false);
           }
+          if (err.message === 'Network Error') {
+            noNetworkError();
+          }
+          if (err.response.status === 500) {
+            dataLoadingError();
+          }
           setSubmitting(false);
+        })
+        .finally(() => {
+          setSubmitting(true);
         });
     },
   });

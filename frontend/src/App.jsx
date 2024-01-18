@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import ChatPage from './Components/ChatPage.jsx';
 import LoginPage from './Components/LoginPage.jsx';
 import RegistrationPage from './Components/RegistrationPage.jsx';
@@ -35,6 +36,7 @@ const App = () => (
           </Routes>
           <ModalComponent />
         </div>
+        <ToastContainer />
       </AuthProvider>
     </BrowserRouter>
   </Provider>

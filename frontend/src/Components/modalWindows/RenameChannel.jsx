@@ -8,6 +8,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import cn from 'classnames';
 import * as yup from 'yup';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import useSocket from '../../Hooks/useSocket.jsx';
 import { actions as modalsActions } from '../../Slices/modalsSlice.js';
 
@@ -20,6 +22,7 @@ const RenameChannel = () => {
   const channelId = modalInfo.targetId;
   const channels = useSelector((state) => state.channelsReducer.channels);
   const channelName = channels.map((i) => i.name);
+  const popUpNotification = () => toast.success(t('channels.channelRenamed'));
 
   const setNameSchema = yup.object().shape({
     channelName: yup.string().trim()
@@ -44,6 +47,7 @@ const RenameChannel = () => {
       socketChat.renameChannel(channelId, values)
         .then(() => {
           onHide();
+          popUpNotification();
         })
         .catch((error) => {
           console.log('ERROR', error);

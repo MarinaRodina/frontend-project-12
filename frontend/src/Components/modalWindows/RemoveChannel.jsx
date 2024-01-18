@@ -6,6 +6,8 @@ import Modal from 'react-bootstrap/Modal';
 import FormGroup from 'react-bootstrap/FormGroup';
 import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import useSocket from '../../Hooks/useSocket.jsx';
 import { actions as modalsActions } from '../../Slices/modalsSlice.js';
 
@@ -16,6 +18,7 @@ const RemoveChannel = () => {
   const onHide = () => dispatch(modalsActions.closeModal());
   const modalInfo = useSelector((state) => state.modalsReducer.setModalInfo);
   const channelId = modalInfo.targetId;
+  const popUpNotification = () => toast.success(t('channels.channelDeleted'));
 
   const {
     handleSubmit, setSubmitting, isSubmitting,
@@ -28,6 +31,7 @@ const RemoveChannel = () => {
       socketChat.removeChannel(channelId)
         .then(() => {
           onHide();
+          popUpNotification();
         })
         .catch((error) => {
           console.log('ERROR', error);

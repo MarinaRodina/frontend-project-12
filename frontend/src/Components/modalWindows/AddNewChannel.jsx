@@ -8,6 +8,8 @@ import cn from 'classnames';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import useSocket from '../../Hooks/useSocket.jsx';
 import { actions as channelsActions } from '../../Slices/channelsSlice.js';
 import { actions as modalsActions } from '../../Slices/modalsSlice.js';
@@ -19,6 +21,7 @@ const AddNewChannel = () => {
   const onHide = () => dispatch(modalsActions.closeModal());
   const channels = useSelector((state) => state.channelsReducer.channels);
   const channelName = channels ? channels.map((channel) => channel.name) : [];
+  const popUpNotification = () => toast.success(t('channels.channelCreated'));
 
   const setNameSchema = yup.object().shape({
     channelName: yup.string().trim()
@@ -45,6 +48,7 @@ const AddNewChannel = () => {
           dispatch(channelsActions.moveToChannel(response.id));
           values.channelName = '';
           onHide();
+          popUpNotification();
         })
         .catch((error) => {
           console.log('ERROR', error);
