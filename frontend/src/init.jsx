@@ -2,18 +2,25 @@ import React from 'react';
 import i18next from 'i18next';
 import { initReactI18next, I18nextProvider } from 'react-i18next';
 import { io } from 'socket.io-client';
+import { Provider as RollbarProvider, ErrorBoundary as RollbarErrorBoundary } from '@rollbar/react';
 import filterWords from 'leo-profanity';
-import resources from './Locales/index.js';
 import App from './App.jsx';
 import SocketProvider from './Components/SocketProvider.jsx';
 import { actions as channelsActions } from './Slices/channelsSlice.js';
 import { actions as messagesActions } from './Slices/messagesSlice.js';
 import slice from './Slices/index.js';
+import resources from './Locales/index.js';
 
 const init = async () => {
-  i18next.use(initReactI18next).init({
+  const defaultLanguage = 'ru';
+  const i18n = i18next.createInstance();
+
+  await i18n.use(initReactI18next).init({
     resources,
-    fallbackLng: 'ru',
+    lng: defaultLanguage,
+    interpolation: {
+      escapeValue: false,
+    },
   });
 
   filterWords.add(filterWords.getDictionary('ru'));
@@ -37,14 +44,23 @@ const init = async () => {
     slice.dispatch(messagesActions.addMessage(payload));
   });
 
+  const rollbarConfig = {
+    accessToken: process.env.REACT_APP_ROLLBAR_ACCESS_TOKEN,
+    environment: 'production',
+  };
+
   return (
-    <React.StrictMode>
-      <I18nextProvider i18n={i18next}>
-        <SocketProvider socket={socket}>
-          <App />
-        </SocketProvider>
-      </I18nextProvider>
-    </React.StrictMode>
+    <RollbarProvider config={rollbarConfig}>
+      <RollbarErrorBoundary>
+        <React.StrictMode>
+          <I18nextProvider i18n={i18n}>
+            <SocketProvider socket={socket}>
+              <App />
+            </SocketProvider>
+          </I18nextProvider>
+        </React.StrictMode>
+      </RollbarErrorBoundary>
+    </RollbarProvider>
   );
 };
 

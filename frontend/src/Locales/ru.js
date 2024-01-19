@@ -73,10 +73,8 @@ export default {
     },
 
     error: {
-      network: 'Ошибка соединения',
-      networkError: 'Ошибка сети',
-      serverError: 'Ошибка сервера',
-      errorLoadingData: 'Ошибка в загрузке данных',
+      networkError: 'Ошибка соединения',
+      dataLoadingError: 'Ошибка в загрузке данных',
     },
   },
 };
