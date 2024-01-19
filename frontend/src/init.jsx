@@ -2,6 +2,7 @@ import React from 'react';
 import i18next from 'i18next';
 import { initReactI18next, I18nextProvider } from 'react-i18next';
 import { io } from 'socket.io-client';
+import filterWords from 'leo-profanity';
 import resources from './Locales/index.js';
 import App from './App.jsx';
 import SocketProvider from './Components/SocketProvider.jsx';
@@ -14,6 +15,9 @@ const init = async () => {
     resources,
     fallbackLng: 'ru',
   });
+
+  filterWords.add(filterWords.getDictionary('ru'));
+  filterWords.add(filterWords.getDictionary('en'));
 
   const socket = io();
 

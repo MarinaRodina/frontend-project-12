@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import filterWords from 'leo-profanity';
 import useSocket from '../../Hooks/useSocket.jsx';
 
 const Messages = () => {
@@ -39,8 +40,7 @@ const Messages = () => {
     return (
       <div className="text-break mb-2" key={id}>
         <b>{username}</b>
-        :
-        {body}
+        {`: ${filterWords.clean(body)}`}
       </div>
     );
   });
