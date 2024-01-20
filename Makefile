@@ -20,7 +20,7 @@ lint:
 	npx eslint .
 
 build:
-    npm run build --prefix frontend
+	npm run build --prefix frontend
 
 start:
-    start-server -s ./frontend/build
+	start-server -s ./frontend/build
