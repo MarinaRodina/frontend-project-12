@@ -16,5 +16,8 @@ deploy:
 lint:
 	npx eslint .
 
+build:
+	npm run build --prefix frontend
+
 starts:
 	make start & make start-frontend
