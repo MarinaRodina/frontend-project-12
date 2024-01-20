@@ -10,7 +10,7 @@ Backend (Hexlet realization): https://github.com/hexlet-components/project-js-ch
 * Clone the repository *git clone git@github.com:MarinaRodina/frontend-project-12.git*
 * Go to repositiry directory *cd frontend-project-12*
 * Install dependencies *make install*
-* Run *make starts* in the terminal to start server and frontend
+* Run *make run* in the terminal to start server and frontend
 
 ### Render link:
 https://project-js-hexlet-chat.onrender.com
