@@ -33,17 +33,16 @@ const ChannelsManagement = ({ showModal }) => {
       <li className="nav-item w-100" key={id}>
         <Dropdown as={ButtonGroup} className="d-flex">
           <Button
+            key={id}
             variant={id === channelIdActive ? 'secondary' : 'light'}
+            className="w-100 rounded-0 text-start text-truncate"
             onClick={() => setChannelIdAction(id)}
-            id="dropdown-split-basic"
-            className="w-100 text-start text-truncate"
           >
             <span className="me-1">#</span>
             {filterWords.clean(name)}
           </Button>
           <Dropdown.Toggle
             variant={id === channelIdActive ? 'flex-grow-0 dropdown-toggle dropdown-toggle-split btn btn-secondary' : 'flex-grow-0 dropdown-toggle dropdown-toggle-split btn'}
-            id="react-aria1668641054-1"
           >
             <span className="visually-hidden">{t('channels.channelManagement')}</span>
           </Dropdown.Toggle>
