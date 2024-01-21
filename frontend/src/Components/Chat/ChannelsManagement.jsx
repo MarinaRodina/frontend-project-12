@@ -22,7 +22,7 @@ const ChannelsManagement = ({ showModal }) => {
       <li className="nav-item w-100" key={id}>
         <button
           type="button"
-          className={id === channelIdActive ? 'w-100 rounded-0 text-start btn btn-secondary truncate' : 'w-100 rounded-0 text-start btn truncate'}
+          className={id === channelIdActive ? 'w-100 rounded-0 text-start btn btn-secondary' : 'w-100 rounded-0 text-start btn'}
           onClick={() => setChannelIdAction(id)}
         >
           <span className="me-1">#</span>
@@ -33,10 +33,10 @@ const ChannelsManagement = ({ showModal }) => {
       <li className="nav-item w-100" key={id}>
         <Dropdown as={ButtonGroup} className="d-flex">
           <Button
-            variant={`w-100 rounded-0 text-start btn ${id === channelIdActive ? 'btn-secondary' : ''} truncate`}
+            variant={id === channelIdActive ? 'secondary' : 'light'}
             onClick={() => setChannelIdAction(id)}
             id="dropdown-split-basic"
-            className="w-50"
+            className="w-100 text-start text-truncate"
           >
             <span className="me-1">#</span>
             {filterWords.clean(name)}
