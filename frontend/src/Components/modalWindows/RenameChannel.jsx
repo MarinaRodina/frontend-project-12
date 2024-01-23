@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -61,14 +61,14 @@ const RenameChannel = () => {
   const classError = cn('mb-2 form-control', {
     'is-invalid': errors.channelName,
   });
-  const inputRef = useRef(null);
 
-  const showModal = () => {
-    inputRef.current.focus();
-  };
+  const inputRef = useRef(null);
+  useEffect(() => {
+    setTimeout(() => inputRef.current.select());
+  }, []);
 
   return (
-    <Modal show centered onShow={showModal}>
+    <Modal show centered>
       <Modal.Header closeButton onHide={onHide}>
         <Modal.Title>{t('modals.renameChannel')}</Modal.Title>
       </Modal.Header>
