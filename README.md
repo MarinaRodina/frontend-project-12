@@ -1,5 +1,5 @@
 ### Hexlet tests and linter status:
-[![Actions Status](https://github.com/MarinaRodina/frontend-project-12/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/MarinaRodina/frontend-project-12/actions) [![Maintainability](https://api.codeclimate.com/v1/badges/7b738270b2d6cc2c5544/maintainability)](https://codeclimate.com/github/MarinaRodina/frontend-project-12/maintainability)
+[![Actions Status](https://github.com/MarinaRodina/frontend-project-12/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/MarinaRodina/frontend-project-12/actions) [![Maintainability](https://api.codeclimate.com/v1/badges/7b738270b2d6cc2c5544/maintainability)](https://codeclimate.com/github/MarinaRodina/frontend-project-12/maintainability) [![Eslint-check](https://github.com/MarinaRodina/frontend-project-12/actions/workflows/eslint-check.yml/badge.svg)](https://github.com/MarinaRodina/frontend-project-12/actions/workflows/eslint-check.yml)
 
 # Hexlet-Chat
 
