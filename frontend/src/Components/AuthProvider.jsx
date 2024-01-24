@@ -1,44 +1,37 @@
 import React, {
-  useState, useEffect, useMemo, useCallback,
+  useState, useMemo, useCallback,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../Contexts/AuthContext.jsx';
 import routes from '../Routes.js';
 
 const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
+  // console.log('!!!!!');
+  // console.log(localStorage.getItem('userInfo'));
+  const getUser = JSON.parse(localStorage.getItem('userInfo'));
+  const [token, setToken] = useState(getUser ?? null);
+  // console.log(token.username);
 
   const navigate = useNavigate();
-
-  const getCurrentUser = () => {
-    const user = JSON.parse(localStorage.getItem('userInfo'));
-    return user ?? null;
-  };
-
-  useEffect(() => {
-    const user = getCurrentUser();
-    setToken(user);
-  }, []);
 
   const logIn = useCallback((response) => {
     const data = JSON.stringify(response.data);
     localStorage.setItem('userInfo', data);
     setToken(data);
     navigate(routes.chatPagePath());
-  }, [setToken, navigate]);
+  }, [navigate]);
 
   const logOut = useCallback(() => {
     localStorage.removeItem('userInfo');
-    setToken(null);
     navigate(routes.loginPagePath());
-  }, [setToken, navigate]);
+  }, [navigate]);
 
   const context = useMemo(() => ({
     token,
-    getCurrentUser,
+    setToken,
     logOut,
     logIn,
-  }), [token, getCurrentUser, logOut, logIn]);
+  }), [token, setToken, logOut, logIn]);
 
   return (
     <AuthContext.Provider value={context}>

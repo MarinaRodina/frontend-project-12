@@ -39,14 +39,13 @@ const Messages = () => {
         console.log('ERROR', error);
       });
   };
-
   const channelMessage = messages.filter((mes) => mes.channelId === channelsId);
-  const currentUser = auth.getCurrentUser();
-  const currentUserName = currentUser.username;
   const messagesBox = channelMessage.map((mes) => {
+    const currentUser = auth.token;
     const { username, id, body } = mes;
-    const isCurrentUser = username === currentUserName;
+    const isCurrentUser = username === currentUser.username;
     const messageClasses = isCurrentUser ? 'bg-light' : 'bg-transparent';
+
     return (
       <div className={`text-break mb-2 ${messageClasses}`} key={id}>
         <b>{username}</b>
