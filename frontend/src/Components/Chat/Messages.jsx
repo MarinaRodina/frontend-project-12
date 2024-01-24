@@ -18,6 +18,10 @@ const Messages = () => {
     inputRef.current.focus();
   }, []);
 
+  const messagesInEnd = useRef(null);
+  const scroll = () => messagesInEnd.current?.scrollIntoView({ behavior: 'auto' });
+  useEffect(() => scroll(), [messages]);
+
   const activeChannelId = (channelItem) => {
     const filter = channelItem.find((channel) => channel.id === channelsId);
     return filter ? filter.name : 'Канал не найден';
@@ -63,6 +67,7 @@ const Messages = () => {
         </div>
         <div id="messages-box" className="chat-messages overflow-auto px-5 ">
           {messagesBox}
+          <div ref={messagesInEnd} />
         </div>
         <div className="mt-auto px-5 py-3">
           <Form noValidate="" className="py-1 border rounded-2" onSubmit={sendMessage}>
