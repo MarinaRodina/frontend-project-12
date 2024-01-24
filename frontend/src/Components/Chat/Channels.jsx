@@ -11,9 +11,17 @@ const Channels = () => {
   const showModal = (type, targetId = null) => dispatch(modalsActions.openModal({ type, targetId }));
 
   const channels = useSelector((state) => state.channelsReducer.channels) || [];
-  const channelsInEnd = useRef(null);
-  const scroll = () => channelsInEnd.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
-  useEffect(() => scroll(), [channels]);
+  const currentChannelId = useSelector((state) => state.channelsReducer.channelId);
+  const channelRef = useRef(null);
+  const defaultChannelId = 1;
+
+  useEffect(() => {
+    if (currentChannelId !== defaultChannelId) {
+      channelRef.current.scrollTo(currentChannelId, channelRef.current.scrollHeight);
+    } else {
+      channelRef.current.scrollTo(0, 0);
+    }
+  }, [channels, currentChannelId]);
 
   return (
     <div className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">
@@ -37,9 +45,8 @@ const Channels = () => {
           <span className="visually-hidden">{t('channels.plus')}</span>
         </button>
       </div>
-      <ul id="channels-box" className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block">
+      <ul ref={channelRef} id="channels-box" className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block">
         <ChannelsManagement showModal={showModal} />
-        <div ref={channelsInEnd} />
       </ul>
     </div>
   );
