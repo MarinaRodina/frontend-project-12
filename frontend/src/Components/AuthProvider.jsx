@@ -6,13 +6,9 @@ import AuthContext from '../Contexts/AuthContext.jsx';
 import routes from '../Routes.js';
 
 const AuthProvider = ({ children }) => {
-  // console.log('!!!!!');
-  // console.log(localStorage.getItem('userInfo'));
+  const navigate = useNavigate();
   const getUser = JSON.parse(localStorage.getItem('userInfo'));
   const [token, setToken] = useState(getUser ?? null);
-  // console.log(token.username);
-
-  const navigate = useNavigate();
 
   const logIn = useCallback((response) => {
     const data = JSON.stringify(response.data);
