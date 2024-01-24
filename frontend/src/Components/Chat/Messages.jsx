@@ -19,12 +19,12 @@ const Messages = () => {
   }, []);
 
   const messagesInEnd = useRef(null);
-  const scroll = () => messagesInEnd.current?.scrollIntoView({ behavior: 'auto' });
+  const scroll = () => messagesInEnd.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   useEffect(() => scroll(), [messages]);
 
   const activeChannelId = (channelItem) => {
     const filter = channelItem.find((channel) => channel.id === channelsId);
-    return filter ? filter.name : 'Канал не найден';
+    return filter ? filter.name : t('channels.notFoundChannel');
   };
 
   const sendMessage = (e) => {

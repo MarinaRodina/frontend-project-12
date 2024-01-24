@@ -63,6 +63,7 @@ export default {
 
     channels: {
       channelManagement: 'Управление каналом',
+      notFoundChannel: 'Канал не найден',
       delete: 'Удалить',
       rename: 'Переименовать',
       channels: 'Каналы',

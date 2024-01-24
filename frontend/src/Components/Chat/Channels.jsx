@@ -1,5 +1,5 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import ChannelsManagement from './ChannelsManagement.jsx';
 import { actions as modalsActions } from '../../Slices/modalsSlice.js';
@@ -9,6 +9,11 @@ const Channels = () => {
   const { t } = useTranslation();
   // eslint-disable-next-line max-len
   const showModal = (type, targetId = null) => dispatch(modalsActions.openModal({ type, targetId }));
+
+  const channels = useSelector((state) => state.channelsReducer.channels) || [];
+  const channelsInEnd = useRef(null);
+  const scroll = () => channelsInEnd.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  useEffect(() => scroll(), [channels]);
 
   return (
     <div className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">
@@ -34,6 +39,7 @@ const Channels = () => {
       </div>
       <ul id="channels-box" className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block">
         <ChannelsManagement showModal={showModal} />
+        <div ref={channelsInEnd} />
       </ul>
     </div>
   );
