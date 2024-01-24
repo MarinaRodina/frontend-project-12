@@ -4,6 +4,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import filterWords from 'leo-profanity';
 import useSocket from '../../Hooks/useSocket.jsx';
+import useAuth from '../../Hooks/useAuth.jsx';
 
 const Messages = () => {
   const { t } = useTranslation();
@@ -12,6 +13,7 @@ const Messages = () => {
   const messages = useSelector((state) => state.messagesReducer.messages) || [];
   const [message, setMessage] = useState('');
   const socketChat = useSocket();
+  const auth = useAuth();
 
   const inputRef = useRef();
   useEffect(() => {
@@ -39,10 +41,17 @@ const Messages = () => {
   };
 
   const channelMessage = messages.filter((mes) => mes.channelId === channelsId);
+  const currentUser = auth.getCurrentUser();
+  const currentUserName = currentUser.username;
   const messagesBox = channelMessage.map((mes) => {
     const { username, id, body } = mes;
+    const isCurrentUser = username === currentUserName;
+    const messageStyle = {
+      backgroundColor: isCurrentUser ? '#fafafa' : 'transparent',
+    };
+
     return (
-      <div className="text-break mb-2" key={id}>
+      <div className="text-break mb-2" style={messageStyle} key={id}>
         <b>{username}</b>
         {`: ${filterWords.clean(body)}`}
       </div>
