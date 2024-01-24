@@ -46,12 +46,9 @@ const Messages = () => {
   const messagesBox = channelMessage.map((mes) => {
     const { username, id, body } = mes;
     const isCurrentUser = username === currentUserName;
-    const messageStyle = {
-      backgroundColor: isCurrentUser ? '#fafafa' : 'transparent',
-    };
-
+    const messageClasses = isCurrentUser ? 'bg-light' : 'bg-transparent';
     return (
-      <div className="text-break mb-2" style={messageStyle} key={id}>
+      <div className={`text-break mb-2 ${messageClasses}`} key={id}>
         <b>{username}</b>
         {`: ${filterWords.clean(body)}`}
       </div>
