@@ -2,7 +2,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  channelId: 1,
   setModalInfo: { type: null, targetId: null },
   isOpened: false,
 };

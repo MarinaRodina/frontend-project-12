@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { defaultChannelId } from '../../Slices/channelsSlice.js';
 import ChannelsManagement from './ChannelsManagement.jsx';
 import { actions as modalsActions } from '../../Slices/modalsSlice.js';
 
@@ -13,7 +14,6 @@ const Channels = () => {
   const channels = useSelector((state) => state.channelsReducer.channels) || [];
   const currentChannelId = useSelector((state) => state.channelsReducer.channelId);
   const channelRef = useRef(null);
-  const defaultChannelId = 1;
 
   useEffect(() => {
     if (currentChannelId !== defaultChannelId) {

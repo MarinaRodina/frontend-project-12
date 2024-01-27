@@ -47,8 +47,8 @@ const ChannelsManagement = ({ showModal }) => {
             <span className="visually-hidden">{t('channels.channelManagement')}</span>
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1" onClick={() => showModal('delete', id)}>{t('channels.delete')}</Dropdown.Item>
-            <Dropdown.Item href="#/action-2" onClick={() => showModal('rename', id)}>{t('channels.rename')}</Dropdown.Item>
+            <Dropdown.Item onClick={() => showModal('delete', id)}>{t('channels.delete')}</Dropdown.Item>
+            <Dropdown.Item onClick={() => showModal('rename', id)}>{t('channels.rename')}</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </li>

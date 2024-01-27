@@ -44,7 +44,6 @@ const AddNewChannel = () => {
       setSubmitting(true);
       socketChat.addChannel(values)
         .then((response) => {
-          console.log(response.id);
           dispatch(channelsActions.moveToChannel(response.id));
           values.channelName = '';
           onHide();
