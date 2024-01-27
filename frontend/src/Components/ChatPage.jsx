@@ -27,14 +27,18 @@ const ChatPage = () => {
         const response = await axios.get(routes.usersPath(), {
           headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}` },
         });
+        console.log(response);
         dispatch(channelsActions.setChannels(response.data.channels));
         dispatch(messagesActions.setMessages(response.data.messages));
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        if (error.status === 401) {
+          navigate(routes.loginPagePath());
+        }
+        console.log(error);
       }
     };
     fetchData();
-  }, [dispatch, auth]);
+  }, [dispatch, auth, navigate]);
 
   return (
     <div className="container h-100 my-4 overflow-hidden rounded shadow">

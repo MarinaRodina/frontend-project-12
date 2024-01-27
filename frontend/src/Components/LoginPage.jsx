@@ -47,18 +47,19 @@ const LoginPage = () => {
       setSubmitting(true);
       axios.post(routes.loginPath(), { username: values.username, password: values.password })
         .then((response) => {
+          console.log(response);
           auth.logIn(response);
           navigate(routes.chatPagePath());
         })
         .catch((err) => {
-          if (err.response.status === 401) {
+          if (err.status === 401) {
             setError(t('login.submissionFailed'));
             setSubmitting(false);
           }
           if (err.message === 'Network Error') {
             noNetworkError();
           }
-          if (err.response.status === 500) {
+          if (err.status === 500) {
             dataLoadingError();
           }
           setSubmitting(false);
