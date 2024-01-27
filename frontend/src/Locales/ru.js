@@ -53,6 +53,7 @@ export default {
       delete: 'Удалить',
       renameChannel: 'Переименовать канал',
       channelName: 'Имя канала',
+      text: 'Введите от 3 до 20 символов',
     },
 
     notFound: {
