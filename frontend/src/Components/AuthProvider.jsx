@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../Contexts/AuthContext.jsx';
-import routes from '../Routes.js';
+import routes from '../routes.js';
 
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();

@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
 import avatar2 from '../images/avatar2.jpg';
-import routes from '../Routes.js';
+import routes from '../routes.js';
 import useAuth from '../Hooks/useAuth.jsx';
 
 const RegistrationPage = () => {

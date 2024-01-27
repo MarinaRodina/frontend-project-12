@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import cn from 'classnames';
 import useAuth from '../Hooks/useAuth.jsx';
-import routes from '../Routes.js';
+import routes from '../routes.js';
 import avatar1 from '../images/avatar1.jpg';
 
 const LoginPage = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import routes from '../Routes.js';
+import routes from '../routes.js';
 import avatar3 from '../images/avatar3.jpg';
 
 const NotFound = () => {

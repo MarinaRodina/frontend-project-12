@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -9,7 +8,7 @@ import RegistrationPage from './Components/RegistrationPage.jsx';
 import HeaderComponent from './Components/HeaderComponent.jsx';
 import NotFoundPage from './Components/NotFoundPage.jsx';
 import AuthProvider from './Components/AuthProvider.jsx';
-import routes from './Routes.js';
+import routes from './routes.js';
 import useAuth from './Hooks/useAuth.jsx';
 import store from './Slices/index.js';
 import ModalComponent from './Components/ModalComponent.jsx';

@@ -3,7 +3,7 @@ import { Container, Navbar, Button } from 'react-bootstrap';
 import { Link, Outlet } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import useAuth from '../Hooks/useAuth.jsx';
-import routes from '../Routes.js';
+import routes from '../routes.js';
 
 const HeaderComponent = () => {
   const auth = useAuth();
