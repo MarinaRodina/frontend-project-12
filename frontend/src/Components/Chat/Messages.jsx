@@ -14,6 +14,7 @@ const Messages = () => {
   const [message, setMessage] = useState('');
   const socketChat = useSocket();
   const auth = useAuth();
+  const currentUser = auth.token;
 
   const inputRef = useRef();
   useEffect(() => {
@@ -31,7 +32,8 @@ const Messages = () => {
 
   const sendMessage = (e) => {
     e.preventDefault();
-    socketChat.newMessage(message, channelsId)
+    const currentName = currentUser.username;
+    socketChat.newMessage(message, channelsId, currentName)
       .then(() => {
         setMessage('');
       })
@@ -39,13 +41,11 @@ const Messages = () => {
         console.log('ERROR', error);
       });
   };
+
   const channelMessage = messages.filter((mes) => mes.channelId === channelsId);
-  const messagesBox = channelMessage.map((mes) => {
-    const currentUser = auth.token;
-    const { username, id, body } = mes;
+  const messagesBox = channelMessage.map(({ username, id, body }) => {
     const isCurrentUser = username === currentUser.username;
     const messageClasses = isCurrentUser ? 'bg-light' : 'bg-transparent';
-
     return (
       <div className={`text-break mb-2 ${messageClasses}`} key={id}>
         <b>{username}</b>

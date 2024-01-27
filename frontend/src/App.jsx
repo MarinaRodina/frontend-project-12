@@ -1,13 +1,12 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import ChatPage from './Components/ChatPage.jsx';
 import LoginPage from './Components/LoginPage.jsx';
 import RegistrationPage from './Components/RegistrationPage.jsx';
 import HeaderComponent from './Components/HeaderComponent.jsx';
 import NotFoundPage from './Components/NotFoundPage.jsx';
-import AuthProvider from './Components/AuthProvider.jsx';
 import routes from './routes.js';
 import useAuth from './Hooks/useAuth.jsx';
 import store from './Slices/index.js';
@@ -20,24 +19,20 @@ const RoutePrivate = ({ children }) => {
 
 const App = () => (
   <Provider store={store}>
-    <BrowserRouter>
-      <AuthProvider>
-        <div className="d-flex flex-column h-100">
-          <HeaderComponent />
-          <Routes>
-            <Route
-              path={routes.chatPagePath()}
-              element={<RoutePrivate><ChatPage /></RoutePrivate>}
-            />
-            <Route path={routes.loginPagePath()} element={<LoginPage />} />
-            <Route path={routes.signupPagePath()} element={<RegistrationPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-          <ModalComponent />
-        </div>
-        <ToastContainer />
-      </AuthProvider>
-    </BrowserRouter>
+    <div className="d-flex flex-column h-100">
+      <HeaderComponent />
+      <Routes>
+        <Route
+          path={routes.chatPagePath()}
+          element={<RoutePrivate><ChatPage /></RoutePrivate>}
+        />
+        <Route path={routes.loginPagePath()} element={<LoginPage />} />
+        <Route path={routes.signupPagePath()} element={<RegistrationPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+      <ModalComponent />
+    </div>
+    <ToastContainer />
   </Provider>
 );
 

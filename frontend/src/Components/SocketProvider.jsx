@@ -32,11 +32,15 @@ const SocketProvider = ({ socket, children }) => {
     });
   }), [socket]);
 
-  const newMessage = useCallback((message, channelsId) => new Promise((resolve, reject) => {
+  const newMessage = useCallback((
+    message,
+    channelsId,
+    currentName,
+  ) => new Promise((resolve, reject) => {
     socket.emit('newMessage', {
       body: message,
       channelId: channelsId,
-      username: JSON.parse(localStorage.getItem('userInfo')).username,
+      username: currentName,
     }, (response) => {
       if (response.status === 'ok') {
         resolve(response.data);

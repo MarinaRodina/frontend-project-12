@@ -1,10 +1,12 @@
 import React from 'react';
 import i18next from 'i18next';
+import { BrowserRouter } from 'react-router-dom';
 import { initReactI18next, I18nextProvider } from 'react-i18next';
 import { io } from 'socket.io-client';
 import { Provider as RollbarProvider, ErrorBoundary as RollbarErrorBoundary } from '@rollbar/react';
 import filterWords from 'leo-profanity';
 import App from './App.jsx';
+import AuthProvider from './Components/AuthProvider.jsx';
 import SocketProvider from './Components/SocketProvider.jsx';
 import { actions as channelsActions } from './Slices/channelsSlice.js';
 import { actions as messagesActions } from './Slices/messagesSlice.js';
@@ -54,9 +56,13 @@ const init = async () => {
       <RollbarErrorBoundary>
         <React.StrictMode>
           <I18nextProvider i18n={i18n}>
-            <SocketProvider socket={socket}>
-              <App />
-            </SocketProvider>
+            <BrowserRouter>
+              <AuthProvider>
+                <SocketProvider socket={socket}>
+                  <App />
+                </SocketProvider>
+              </AuthProvider>
+            </BrowserRouter>
           </I18nextProvider>
         </React.StrictMode>
       </RollbarErrorBoundary>
