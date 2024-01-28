@@ -85,7 +85,7 @@ const AddNewChannel = () => {
               onChange={handleChange}
             />
             <Form.Label className="visually-hidden" htmlFor="channelName">{t('modals.channelName')}</Form.Label>
-            <p>{t('modals.text')}</p>
+            <div>{t('modals.text')}</div>
             <div className="invalid-feedback">{errors.channelName}</div>
           </Modal.Footer>
         </Form.Group>
