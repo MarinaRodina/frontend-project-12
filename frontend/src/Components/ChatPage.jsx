@@ -27,7 +27,6 @@ const ChatPage = () => {
         const response = await axios.get(routes.usersPath(), {
           headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}` },
         });
-        console.log(response);
         dispatch(channelsActions.setChannels(response.data.channels));
         dispatch(messagesActions.setMessages(response.data.messages));
       } catch (error) {

@@ -10,11 +10,12 @@ const Messages = () => {
   const { t } = useTranslation();
   const channels = useSelector((state) => state.channelsReducer.channels) || [];
   const channelsId = useSelector((state) => state.channelsReducer.channelId);
+  // eslint-disable-next-line
   const messages = useSelector((state) => state.messagesReducer.messages) || [];
   const [message, setMessage] = useState('');
   const socketChat = useSocket();
   const auth = useAuth();
-  const currentUser = auth.token;
+  const currentUser = JSON.parse(auth.token);
 
   const inputRef = useRef();
   useEffect(() => {
