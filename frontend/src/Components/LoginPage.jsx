@@ -47,7 +47,6 @@ const LoginPage = () => {
       setSubmitting(true);
       axios.post(routes.loginPath(), { username: values.username, password: values.password })
         .then((response) => {
-          console.log(response);
           auth.logIn(response);
           navigate(routes.chatPagePath());
         })

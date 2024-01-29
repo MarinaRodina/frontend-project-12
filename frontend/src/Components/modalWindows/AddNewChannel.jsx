@@ -80,6 +80,7 @@ const AddNewChannel = () => {
               ref={inputRef}
               name="channelName"
               id="channelName"
+              placeholder={t('modals.text')}
               className={classError}
               value={values.channelName}
               onChange={handleChange}
